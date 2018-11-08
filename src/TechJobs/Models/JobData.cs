@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -42,6 +43,8 @@ namespace TechJobs.Models
             values.Sort();
             return values;
         }
+
+      
 
         /**
          * Search all columns for the given term
