@@ -7,10 +7,11 @@ namespace TechJobs.Controllers
     {
         public IActionResult Index()
         {
-            Dictionary<string, string> actionChoices = new Dictionary<string, string>();
-            actionChoices.Add("search", "Search");
-            actionChoices.Add("list", "List");
-            
+            var actionChoices = new Dictionary<string, string>
+            {
+                {"search", "Search"}, {"list", "List"}
+            };
+
             ViewBag.actions = actionChoices;
 
             return View();

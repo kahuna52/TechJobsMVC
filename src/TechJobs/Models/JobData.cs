@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TechJobs.Models
 {
-    class JobData
+    internal class JobData
     {
         static List<Dictionary<string, string>> AllJobs = new List<Dictionary<string, string>>();
         static bool IsDataLoaded = false;
@@ -27,9 +27,9 @@ namespace TechJobs.Models
         {
             LoadData();
 
-            List<string> values = new List<string>();
+            var values = new List<string>();
 
-            foreach (Dictionary<string, string> job in AllJobs)
+            foreach (var job in AllJobs)
             {
                 string aValue = job[column];
 
@@ -54,22 +54,20 @@ namespace TechJobs.Models
             // load data, if not already loaded
             LoadData();
 
-            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            var jobs = new List<Dictionary<string, string>>();
 
-            foreach (Dictionary<string, string> row in AllJobs)
+            foreach (var row in AllJobs)
             {
 
                 foreach (string key in row.Keys)
                 {
                     string aValue = row[key];
 
-                    if (aValue.ToLower().Contains(value.ToLower()))
-                    {
-                        jobs.Add(row);
+                    if (!aValue.ToLower().Contains(value.ToLower())) continue;
+                    jobs.Add(row);
 
-                        // Finding one field in a job that matches is sufficient
-                        break;
-                    }
+                    // Finding one field in a job that matches is sufficient
+                    break;
                 }
             }
 
@@ -88,9 +86,9 @@ namespace TechJobs.Models
             // load data, if not already loaded
             LoadData();
 
-            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            var jobs = new List<Dictionary<string, string>>();
 
-            foreach (Dictionary<string, string> row in AllJobs)
+            foreach (var row in AllJobs)
             {
                 string aValue = row[column];
 
@@ -114,30 +112,30 @@ namespace TechJobs.Models
                 return;
             }
 
-            List<string[]> rows = new List<string[]>();
+            var rows = new List<string[]>();
 
-            using (StreamReader reader = File.OpenText("Models/job_data.csv"))
+            using (var reader = File.OpenText("Models/job_data.csv"))
             {
                 while (reader.Peek() >= 0)
                 {
                     string line = reader.ReadLine();
-                    string[] rowArrray = CSVRowToStringArray(line);
-                    if (rowArrray.Length > 0)
+                    var rowArray = CSVRowToStringArray(line);
+                    if (rowArray.Length > 0)
                     {
-                        rows.Add(rowArrray);
+                        rows.Add(rowArray);
                     }
                 }
             }
 
-            string[] headers = rows[0];
+            var headers = rows[0];
             rows.Remove(headers);
 
             // Parse each row array into a more friendly Dictionary
-            foreach (string[] row in rows)
+            foreach (var row in rows)
             {
-                Dictionary<string, string> rowDict = new Dictionary<string, string>();
+                var rowDict = new Dictionary<string, string>();
 
-                for (int i = 0; i < headers.Length; i++)
+                for (var i = 0; i < headers.Length; i++)
                 {
                     rowDict.Add(headers[i], row[i]);
                 }
@@ -152,9 +150,9 @@ namespace TechJobs.Models
          */
         private static string[] CSVRowToStringArray(string row, char fieldSeparator = ',', char stringSeparator = '\"')
         {
-            bool isBetweenQuotes = false;
-            StringBuilder valueBuilder = new StringBuilder();
-            List<string> rowValues = new List<string>();
+            var isBetweenQuotes = false;
+            var valueBuilder = new StringBuilder();
+            var rowValues = new List<string>();
 
             // Loop through the row string one char at a time
             foreach (char c in row.ToCharArray())

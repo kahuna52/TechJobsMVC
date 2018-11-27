@@ -31,14 +31,14 @@ namespace TechJobs.Controllers
         {
             if (column.Equals("all"))
             {
-                List<Dictionary<string, string>> jobs = JobData.FindAll();
+                var jobs = JobData.FindAll();
                 ViewBag.title =  "All Jobs";
                 ViewBag.jobs = jobs;
                 return View("Jobs");
             }
             else
             {
-                List<string> items = JobData.FindAll(column);
+                var items = JobData.FindAll(column);
                 ViewBag.title =  "All " + columnChoices[column] + " Values";
                 ViewBag.column = column;
                 ViewBag.items = items;
@@ -48,7 +48,7 @@ namespace TechJobs.Controllers
 
         public IActionResult Jobs(string column, string value)
         {
-            List<Dictionary<String, String>> jobs = JobData.FindByColumnAndValue(column, value);
+            var jobs = JobData.FindByColumnAndValue(column, value);
             ViewBag.title = "Jobs with " + columnChoices[column] + ": " + value;
             ViewBag.jobs = jobs;
 

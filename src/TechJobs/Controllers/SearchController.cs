@@ -7,7 +7,7 @@ namespace TechJobs.Controllers
     public class SearchController : Controller
 
     {
-        public static string search { get; private set; }
+        public static string Search { get; private set; }
 
        
         public IActionResult Index()
@@ -24,7 +24,7 @@ namespace TechJobs.Controllers
         
         public IActionResult Results(string searchType, string searchTerm)
         {
-            List<Dictionary<string, string>> jobs = JobData.FindByValue(searchTerm);         
+            var jobs = JobData.FindByValue(searchTerm);         
             ViewBag.jobs = jobs;
             ViewBag.columns = ListController.columnChoices;
             return View("Index");

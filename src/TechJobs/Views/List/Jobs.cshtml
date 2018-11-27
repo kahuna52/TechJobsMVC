@@ -3,18 +3,17 @@
 <h3>@ViewBag.jobs.Count Result(s)</h3>
 
 @{
-    <table class=" job-listing">
+    <table >
 
         @foreach (Dictionary<string, string> job in ViewBag.jobs)
         {
-            @foreach (KeyValuePair<string, string> listing in job)
+            foreach (var listing in job)
             {
-                <tbody>
-                    <tr>
-                        <td>@listing.Key</td>
-                        <td>@listing.Value</td>
+                
+                    <tr >
+                        <td class =" job-listing">@listing.Key</td>
+                        <td class=" job-listing">@listing.Value
                     </tr>
-                </tbody>
             }
         }
     </table>
